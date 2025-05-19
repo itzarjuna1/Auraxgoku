@@ -1,18 +1,15 @@
-from pyrogram import Client, filters
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message
+from pyrogram import filters
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 from pyrogram.enums import ChatMembersFilter
-from pyrogram.handlers import ChatJoinRequestHandler
-from pyrogram.types import CallbackQuery
 
-from config import OWNER_ID  # or replace with your admin list
+from Oneforall import app  # <- this is important
+from config import OWNER_ID
 
-admins_cache = {}  # To cache admin list temporarily
+admins_cache = {}
 
-
-async def get_admins(client: Client, chat_id: int):
+async def get_admins(client, chat_id):
     if chat_id in admins_cache:
         return admins_cache[chat_id]
-
     admins = []
     async for member in client.get_chat_members(chat_id, filter=ChatMembersFilter.ADMINISTRATORS):
         if not member.user.is_bot:
@@ -21,7 +18,7 @@ async def get_admins(client: Client, chat_id: int):
     return admins
 
 
-async def handle_join_request(client: Client, message):
+async def handle_join_request(client, message):
     chat_id = message.chat.id
     from_user = message.from_user
 
@@ -47,13 +44,14 @@ async def handle_join_request(client: Client, message):
     await client.send_message(chat_id, text, reply_markup=buttons)
 
 
-@Client.on_chat_join_request()
+@app.on_chat_join_request()
 async def on_join_request(client, message):
+    print("Join request received")  # DEBUG
     await handle_join_request(client, message)
 
 
-@Client.on_callback_query(filters.regex(r"^(approve|disapprove)_(\-?\d+)_(\d+)$"))
-async def on_approval_action(client: Client, callback_query: CallbackQuery):
+@app.on_callback_query(filters.regex(r"^(approve|disapprove)_(\-?\d+)_(\d+)$"))
+async def on_approval_action(client, callback_query: CallbackQuery):
     action, chat_id, user_id = callback_query.data.split("_")
     chat_id = int(chat_id)
     user_id = int(user_id)
@@ -67,7 +65,7 @@ async def on_approval_action(client: Client, callback_query: CallbackQuery):
             await callback_query.edit_message_text("✅ User has been approved.")
         except Exception as e:
             await callback_query.edit_message_text(f"Failed to approve: {e}")
-    elif action == "disapprove":
+    else:
         try:
             await client.decline_chat_join_request(chat_id, user_id)
             await callback_query.edit_message_text("❌ User has been disapproved.")
