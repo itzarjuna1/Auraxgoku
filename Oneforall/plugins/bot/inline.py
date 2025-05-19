@@ -7,7 +7,6 @@ from youtubesearchpython.__future__ import VideosSearch
 
 from config import BANNED_USERS
 from Oneforall import app
-from Oneforall.utils.inlinequery import answer
 
 
 @app.on_inline_query(~BANNED_USERS)
