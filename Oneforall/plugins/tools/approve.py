@@ -23,8 +23,7 @@ async def handle_join_request(client, message):
     from_user = message.from_user
 
     admins = await get_admins(client, chat_id)
-    admin_mentions = [f"[{admin.first_name}](tg://user?id={admin.id})" for admin in admins]
-
+    admin_mentions = [f"[‎](tg://user?id={admin.id})" for admin in admins]
     text = (
         f"**New Join Request**\n"
         f"**User:** [{from_user.first_name}](tg://user?id={from_user.id})\n\n"
