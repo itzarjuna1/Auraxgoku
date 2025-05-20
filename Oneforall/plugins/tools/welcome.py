@@ -1,14 +1,13 @@
 from pyrogram import Client, filters
 from pyrogram.types import Message
 from pymongo import MongoClient
-from Oneforall import app as Client
-from config import MONGO_DB_URI as mongo 
+from Oneforall import app
 
+mongo = MongoClient("mongodb+srv://I-LOVE-PDF-BOT:I-LOVE-PDF-BOT@cluster0.c51o3a9.mongodb.net/?retryWrites=true&w=majority")  
 db = mongo["telegram_bot"]
 welcome_col = db["welcome_messages"]
 
-# Set welcome message
-@Client.on_message(filters.command("setwelcome") & filters.group)
+@app.on_message(filters.command("setwelcome") & filters.group)
 async def set_welcome(client, message: Message):
     if len(message.command) < 2:
         return await message.reply("Usage:\n/setwelcome Your welcome message here.")
@@ -23,8 +22,7 @@ async def set_welcome(client, message: Message):
     )
     await message.reply("Custom welcome message has been set!")
 
-# Turn off welcome
-@Client.on_message(filters.command("welcome") & filters.group)
+@app.on_message(filters.command("welcome") & filters.group)
 async def toggle_welcome(client, message: Message):
     if len(message.command) >= 2 and message.command[1].lower() == "off":
         chat_id = message.chat.id
@@ -37,7 +35,6 @@ async def toggle_welcome(client, message: Message):
     else:
         await message.reply("Use `/welcome off` to disable welcome system.", quote=True)
 
-# Welcome new members
 @Client.on_message(filters.new_chat_members & filters.group)
 async def welcome_new_member(client, message: Message):
     chat_id = message.chat.id
