@@ -35,7 +35,7 @@ async def toggle_welcome(client, message: Message):
     else:
         await message.reply("Use `/welcome off` to disable welcome system.", quote=True)
 
-@Client.on_message(filters.new_chat_members & filters.group)
+@app.on_message(filters.new_chat_members & filters.group)
 async def welcome_new_member(client, message: Message):
     chat_id = message.chat.id
     data = welcome_col.find_one({"chat_id": chat_id, "enabled": True})
