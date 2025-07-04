@@ -7,7 +7,7 @@ if os.path.exists(".env"):
 # Telegram API Configuration
 API_ID = int(os.environ.get("API_ID", "22565342"))  # Your Telegram API ID
 API_HASH = os.environ.get("API_HASH", "75e035926f72f2f4155a6f5f6e64be03")  # Your Telegram API HASH
-BOT_TOKEN = os.environ.get("BOT_TOKEN", "")  # Your Bot Token
+BOT_TOKEN = os.environ.get("BOT_TOKEN", "7684739810:AAH-aVDl3sSHAgN3ULox_Ngc1bBK3_uh7fU")  # Your Bot Token
 
 # MongoDB Configuration
 MONGO_DB_URI = os.environ.get("MONGO_DB_URI", "mongodb+srv://knight4563:knight4563@cluster0.a5br0se.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")  # Your MongoDB URI
