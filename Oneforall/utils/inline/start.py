@@ -33,7 +33,6 @@ def private_panel(_):
             InlineKeyboardButton(text=_["S_B_6"], url=config.SUPPORT_CHANNEL),
         ],
         [
-            InlineKeyboardButton(text=_["H_B_25"], callback_data="help_callback hb16"),
             InlineKeyboardButton(text=_["S_B_7"], callback_data="gib_source"),
         ],
     ]
