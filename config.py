@@ -18,7 +18,7 @@ BOT_USERNAME = os.environ.get("BOT_USERNAME", "7931445226:AAGf8aP4uJxhdCNyfsa-Rg
 SESSION_STRING = os.environ.get("SESSION_STRING", "BQFYUd4AkVjGeCzSGzqd7OdkMyLtZ373VPK5ZFihSAgdfuS7ccs-kfHSGE1Lz5yvvXQroBg9Q_XQfmTvHgllIRlcZBwNdB4OQjRQmspcMBa5gFQCWN_4Vw7lhsA-6Hanfts29gWEUAfWJj1Lt4sI29a7ufq9k4oPThym31akZQBscakrugQf-Ed2QwCnORyOzn8-nTzZaVRduBjldci1doBx0n1d8prsS2xLTm9gBbYWsnVfZePFE5l0OJbTSz62w7vLM0qQPMjS6FKXllxkcriO5Dc5RGsKGVwJ-boT0bUrOqM4fV3jB_WLsKiEG7bv4jA-O0zYBgH7LRwU2gi7EGvGjy8ZgQAAAAHQda6jAA")  # Pyrogram Session String (needed for userbot mode)
 
 # Owner and Admins Configuration
-OWNER_ID = int(os.environ.get("OWNER_ID", "7926944005"))  # Your Telegram User ID
+OWNER_ID = int(os.environ.get("OWNER_ID", "7290350162"))  # Your Telegram User ID
 SUDO_USERS = list(map(int, os.environ.get("SUDO_USERS", "").split()))  # Sudo Users List
 SUPPORT_CHAT = os.environ.get("SUPPORT_CHAT", "https://t.me/dark_knight_support")  # Support Chat Username without @
 
